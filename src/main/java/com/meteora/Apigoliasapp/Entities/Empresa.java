@@ -1,15 +1,23 @@
 package com.meteora.Apigoliasapp.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.meteora.Apigoliasapp.Dto.EstagiarioDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
+@Getter
+@Setter
 @Data
 @Table
+@NoArgsConstructor
+@AllArgsConstructor
 public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -83,9 +91,19 @@ public class Empresa {
     @Column
     private String emailResp_juridico;
 */
-    @OneToMany
+  @JsonIgnore
+  @OneToMany(mappedBy = "empresa", fetch = FetchType.EAGER)
     private List<Estagiario> estagiario;
 
-
     //Possivel senha
+
+
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", estagiario=" + estagiario +
+                '}';
+    }
 }

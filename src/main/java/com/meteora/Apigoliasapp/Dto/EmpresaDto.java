@@ -1,7 +1,6 @@
 package com.meteora.Apigoliasapp.Dto;
 
 import com.meteora.Apigoliasapp.Entities.Empresa;
-import com.meteora.Apigoliasapp.Entities.Estagiario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class EmpresaDto {
 
-    private Long id;
+  //  private Long id;
 
     private String nome;
 
@@ -45,10 +44,15 @@ public class EmpresaDto {
 
     private String emailResp_juridico; */
 
-    private List<Estagiario> estagiario;
+
+    public List<EstagiarioDto> getEstagiarios() {
+        return estagiarios;
+    }
+
+    private List<EstagiarioDto> estagiarios;
 
     public EmpresaDto(Empresa empresa) {
-        this.id = empresa.getId();
+//        this.id = empresa.getId();
         this.nome = empresa.getNome();
     /*    this.cnpj = empresa.getCnpj();
         this.cidade = empresa.getCidade();
@@ -64,6 +68,7 @@ public class EmpresaDto {
         this.nomeResp_juridico = empresa.getNomeResp_juridico();
         this.contatoResp_juridico = empresa.getContatoResp_juridico();
         this.emailResp_juridico = empresa.getEmailResp_juridico();
-     */ this.estagiario = empresa.getEstagiario();
+     */
     }
+
 }

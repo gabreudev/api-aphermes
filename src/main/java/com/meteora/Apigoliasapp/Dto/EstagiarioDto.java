@@ -2,8 +2,6 @@ package com.meteora.Apigoliasapp.Dto;
 
 import com.meteora.Apigoliasapp.Entities.Empresa;
 import com.meteora.Apigoliasapp.Entities.Estagiario;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,7 +39,12 @@ public class EstagiarioDto {
 
     private String curriculoLattes;  */
 
-    private Empresa empresa;
+
+    public EmpresaDto getEmpresa() {
+        return empresa;
+    }
+
+    private EmpresaDto empresa;
 
     public EstagiarioDto(Estagiario estagiario) {
         this.id = estagiario.getId();
@@ -57,7 +60,7 @@ public class EstagiarioDto {
         this.telefoneFixo = estagiario.getTelefoneFixo();
         this.linkedin = estagiario.getLinkedin();
         this.curriculoLattes = estagiario.getCurriculoLattes();
-     */   this.empresa = estagiario.getEmpresa();
+     */
     }
     public static List<EstagiarioDto> convert(List<Estagiario> estagiario){
         return estagiario.stream().map(EstagiarioDto::new).collect(Collectors.toList());

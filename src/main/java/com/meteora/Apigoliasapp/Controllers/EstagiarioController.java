@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Estagiario")
+@RequestMapping("/estagiario")
 public class EstagiarioController {
     @Autowired
     private EstagiarioRepository estagiarioRepository;
@@ -26,7 +26,7 @@ public class EstagiarioController {
         return estagiarioRepository.save(estagiario);
     }
 
-    @PutMapping("/Editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Estagiario> atualizarDados(@PathVariable Long id, @RequestBody Estagiario estagiario) {
         if (!estagiarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -36,13 +36,17 @@ public class EstagiarioController {
         return ResponseEntity.ok(estagiario);
     }
 
-    @DeleteMapping("/Deletar/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         if (!estagiarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         estagiarioRepository.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-
+    }/*
+    @GetMapping("/buscarEstagiario/{cidade}")
+    public List<EstagiarioDto> listaPorCidade(@PathVariable("cidade") String cidade) {
+        List<Estagiario> estagiario = estagiarioRepository.findByCidade(cidade);
+        return EstagiarioDto.convert(estagiario);
+    }*/
 }

@@ -1,5 +1,6 @@
 package com.meteora.Apigoliasapp.Entities;
 
+import com.meteora.Apigoliasapp.Dto.EmpresaDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -19,49 +20,22 @@ public class Estagiario {
     @NotEmpty
     @Column
     private String nome;
-   /* @NotNull
-    @NotEmpty
-    @Column
-    private String cpf;
-    @NotNull
-    @NotEmpty
-    @Column
-    private String cidade;
-    @NotNull
-    @NotEmpty
-    @Column
-    private String endereço;
-    @NotNull
-    @NotEmpty
-    @Column
-    private String rg;
-    @NotNull
-    @NotEmpty
-    @Column
-    private String uf;
-    @NotNull
-    @NotEmpty
-    @Column
-    private String email;
-    @NotNull
-    @NotEmpty
-    @Column
-    private String cep;
-    @NotNull
-    @NotEmpty
-    @Column
-    private String telefoneCelular;
+   @ManyToOne(fetch = FetchType.EAGER)
+   @JoinColumn(name = "empresa_id")
+   private Empresa empresa;
 
-    @Column
-    private String telefoneFixo;
-
-    @Column
-    private String linkedin;
-
-    @Column
-    private String curriculoLattes;
-*/
-    @OneToOne
+   /* @ManyToOne
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
     //Possível senha
+    */
+
+    @Override
+    public String toString() {
+        return "Estagiario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", empresa=" + empresa +
+                '}';
+    }
 }

@@ -1,29 +1,24 @@
 package com.meteora.Apigoliasapp.Controllers;
-
 import com.meteora.Apigoliasapp.Dto.EmpresaDto;
-import com.meteora.Apigoliasapp.Dto.EstagiarioDto;
 import com.meteora.Apigoliasapp.Entities.Empresa;
-import com.meteora.Apigoliasapp.Entities.Estagiario;
 import com.meteora.Apigoliasapp.Repositories.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/Empresa")
+@RequestMapping("/empresa")
 public class EmpresaController {
 
     @Autowired
     private EmpresaRepository empresaRepository;
 
     @PostMapping("/cadastrar")
-    public Empresa cadastrarEstagiario(@RequestBody Empresa empresa) {
+    public Empresa cadastrarEmpresa(@RequestBody Empresa empresa) {
         return empresaRepository.save(empresa);
     }
 
-    @PutMapping("/Editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Empresa> atualizarDados(@PathVariable Long id, @RequestBody Empresa empresa) {
         if (!empresaRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -32,7 +27,7 @@ public class EmpresaController {
         empresa = empresaRepository.save(empresa);
         return ResponseEntity.ok(empresa);
     }
-    @DeleteMapping("/Deletar/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         if (!empresaRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -42,7 +37,8 @@ public class EmpresaController {
     }
     @GetMapping("/buscarEmpresa/{nome}")
     public EmpresaDto listaEmpresa(@PathVariable("nome") String nome) {
-        EmpresaDto empresaDto = empresaRepository.findByNome(nome);
+        Empresa empresa = empresaRepository.findByNome(nome);
+        EmpresaDto empresaDto = new EmpresaDto(empresa);
         return empresaDto;
     }
 }
