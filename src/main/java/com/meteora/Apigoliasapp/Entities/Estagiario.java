@@ -10,7 +10,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@Data
+//@Data
 @Table
 public class Estagiario {
     @Id
