@@ -1,6 +1,5 @@
-package com.meteora.Apigoliasapp.Dto;
+package com.meteora.Apigoliasapp.Dto.response;
 
-import com.meteora.Apigoliasapp.Entities.Empresa;
 import com.meteora.Apigoliasapp.Entities.Estagiario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,11 +39,8 @@ public class EstagiarioDto {
     private String curriculoLattes;  */
 
 
-    public EmpresaDto getEmpresa() {
-        return empresa;
-    }
 
-    private EmpresaDto empresa;
+    private EmpresaDto empresaDTO;
 
     public EstagiarioDto(Estagiario estagiario) {
         this.id = estagiario.getId();
@@ -61,9 +57,9 @@ public class EstagiarioDto {
         this.linkedin = estagiario.getLinkedin();
         this.curriculoLattes = estagiario.getCurriculoLattes();
      */
-    }
-    public static List<EstagiarioDto> convert(List<Estagiario> estagiario){
-        return estagiario.stream().map(EstagiarioDto::new).collect(Collectors.toList());
+        if(estagiario.getEmpresa()!=null) {
+            this.empresaDTO = new EmpresaDto(estagiario.getEmpresa());
+        }
     }
 }
 

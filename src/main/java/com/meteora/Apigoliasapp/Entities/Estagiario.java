@@ -1,17 +1,14 @@
 package com.meteora.Apigoliasapp.Entities;
-
-import com.meteora.Apigoliasapp.Dto.EmpresaDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
-
 @Getter
 @Setter
-//@Data
 @Table
+@NoArgsConstructor
 public class Estagiario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,9 +17,13 @@ public class Estagiario {
     @NotEmpty
     @Column
     private String nome;
-   @ManyToOne(fetch = FetchType.EAGER)
+   @ManyToOne
    @JoinColumn(name = "empresa_id")
    private Empresa empresa;
+
+   public Estagiario(String nome) {
+       this.nome = nome;
+   }
 
    /* @ManyToOne
     @JoinColumn(name = "empresa_id")

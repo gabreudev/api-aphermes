@@ -15,24 +15,26 @@ import java.util.List;
 
 @SpringBootApplication
 public class ApiGoliasappApplication {
-	@Autowired EmpresaRepository empresaRepository;
-	@Autowired EstagiarioRepository estagiarioRepository;
+	@Autowired
+	private EmpresaRepository empresaRepository;
+	@Autowired
+	private EstagiarioRepository estagiarioRepository;
 	@Bean
-	public CommandLineRunner init(@Autowired EmpresaRepository empresaRepository){
+	public CommandLineRunner init(){
 		return args -> {
 			Empresa empresa1 = new Empresa();
 			empresa1.setNome("meteora");
+
+			Estagiario estagiario1 = new Estagiario("gabriel");
+			estagiario1.setEmpresa(empresa1);
+
 			empresaRepository.save(empresa1);
 
-			Estagiario estagiario1 = new Estagiario();
-			estagiario1.setEmpresa(empresa1);
-			estagiario1.setNome("gabriel");
+
 			estagiarioRepository.save(estagiario1);
 
 			Empresa empresa = empresaRepository.findEmpresaFetchEstagiarios(empresa1.getId());
-		//	System.out.println(empresa);
-			System.out.println(empresa.getEstagiario());
-		//	System.out.println(empresa1.getEstagiario());
+			System.out.println(estagiario1);
 
 		};
 	}
